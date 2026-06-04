@@ -24,7 +24,7 @@ CREATE TABLE product_category_name_translation (
 
 CREATE TABLE products (
     product_id                 VARCHAR(50) PRIMARY KEY,
-    product_category_name      VARCHAR(100) REFERENCES product_category_name_translation(product_category_name)
+    product_category_name      VARCHAR(100) REFERENCES product_category_name_translation(product_category_name),
     product_name_length        SMALLINT,
     product_description_length INTEGER,
     product_photos_qty         SMALLINT,
@@ -46,7 +46,7 @@ CREATE TABLE order_items (
     order_item_id          SMALLINT,
     product_id             VARCHAR(50) REFERENCES products(product_id),
     seller_id              VARCHAR(50) REFERENCES sellers(seller_id),
-    shipping_limit_date    TIMESTAMP
+    shipping_limit_date    TIMESTAMP,
     price                  NUMERIC(10, 2),
     freight_value          NUMERIC(10, 2),
 
@@ -66,7 +66,7 @@ CREATE TABLE payments (
 CREATE TABLE reviews (
     review_id VARCHAR(50) PRIMARY KEY,
     order_id VARCHAR(50) REFERENCES orders(order_id),
-    review_sccore SMALLINT CHECK (review_score BETWEEN 1 AND 5),
+    review_score SMALLINT CHECK (review_score BETWEEN 1 AND 5),
     review_comment_title TEXT,
     review_comment_message TEXT, 
     review_creation_date TIMESTAMP,
