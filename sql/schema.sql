@@ -24,7 +24,7 @@ CREATE TABLE product_category_name_translation (
 
 CREATE TABLE products (
     product_id                 VARCHAR(50) PRIMARY KEY,
-    product_category_name      VARCHAR(100) REFERENCES product_category_name_translation(product_category_name),
+    product_category_name      VARCHAR(100),
     product_name_length        SMALLINT,
     product_description_length INTEGER,
     product_photos_qty         SMALLINT,
@@ -63,8 +63,10 @@ CREATE TABLE payments (
     PRIMARY KEY (order_id, payment_sequential)
 );
 
+-- surrogate key `id` is added
 CREATE TABLE reviews (
-    review_id VARCHAR(50) PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    review_id VARCHAR(50),
     order_id VARCHAR(50) REFERENCES orders(order_id),
     review_score SMALLINT CHECK (review_score BETWEEN 1 AND 5),
     review_comment_title TEXT,
