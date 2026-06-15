@@ -11,8 +11,8 @@ st.title("Delivery Performance")
 
 st.caption("B1 & B2 - Regional failures and seller risk")
 
-b1 = pd.read_csv("data/b1_delivery.csv")
-b2 = pd.read_csv("data/b2_sellers.csv")
+b1 = pd.read_csv("dashboard/data/b1_delivery.csv")
+b2 = pd.read_csv("dashboard/data/b2_sellers.csv")
 
 # b1
 st.subheader("Delivery Performance by State")

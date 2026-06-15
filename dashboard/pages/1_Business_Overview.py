@@ -10,8 +10,8 @@ st.set_page_config(
 st.title("Business Overview")
 st.caption("A1 & A2 - Revenue trends and category performance")
 
-a1 = pd.read_csv("data/a1_revenue.csv", parse_dates=['order_month'])
-a2 = pd.read_csv("data/a2_categories.csv")
+a1 = pd.read_csv("dashboard/data/a1_revenue.csv", parse_dates=['order_month'])
+a2 = pd.read_csv("dashboard/data/a2_categories.csv")
 
 # a1
 st.subheader("Monthly Revenue & Order Volume")

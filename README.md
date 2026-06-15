@@ -245,8 +245,7 @@ psql -U postgres -d olist -f /sql/load.sql
 pip install -r requirements.txt
 
 # 6. run dashboard
-cd dashboard
-streamlit run app.py
+streamlit run .\dashboard\app.py
 ```
 
 ---

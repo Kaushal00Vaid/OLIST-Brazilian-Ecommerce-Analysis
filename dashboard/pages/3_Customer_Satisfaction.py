@@ -7,7 +7,7 @@ st.set_page_config(page_title="Customer Satisfaction", layout="wide")
 st.title("Customer Satisfaction")
 st.caption("C1 - How delivery delay destroys review scores")
 
-c1 = pd.read_csv('data/c1_delay_buckets.csv')
+c1 = pd.read_csv('dashboard/data/c1_delay_buckets.csv')
 
 fig = go.Figure()
 

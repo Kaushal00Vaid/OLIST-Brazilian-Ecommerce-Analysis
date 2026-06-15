@@ -7,8 +7,8 @@ st.set_page_config(page_title="Retention & Segmentation", layout="wide")
 st.title("Retention & Segmentation")
 st.caption("C2 & RFM - Cohort retention and customer segments")
 
-cohort = pd.read_csv('data/cohort_matrix.csv', index_col=0)
-rfm = pd.read_csv('data/rfm_segments.csv')
+cohort = pd.read_csv('dashboard/data/cohort_matrix.csv', index_col=0)
+rfm = pd.read_csv('dashboard/data/rfm_segments.csv')
 
 # --- Cohort heatmap ---
 st.subheader("Cohort Retention Heatmap")
