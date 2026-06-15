@@ -52,6 +52,12 @@ col1.metric("Peak Month Revenue", "R$ 1.15M", "Nov 2017")
 col2.metric("Avg Order Value", f"R$ {a1['avg_order_value'].mean():.0f}")
 col3.metric("Total Orders", f"{a1['total_orders'].sum():,.0f}")
 
+col1, col2 = st.columns(2)
+with col1:
+    st.info("November 2017 spike: Week of Nov 20 saw 2915 orders vs prior week avg of ~1050 - a 131% increase. Driven by Black Friday (Nov 24) and Cyber Monday (Nov 27). Decay back to baseline by mid-December confirms event-driven, not sustained growth.")
+with col2:
+    st.info("Consistent month-on-month growth from Jan 2017 through mid-2018")
+
 st.divider()
 
 # a2
