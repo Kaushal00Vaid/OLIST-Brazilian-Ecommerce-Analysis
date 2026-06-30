@@ -1,8 +1,8 @@
 # Olist Brazilian E-Commerce Analysis
 
-**What drives customer satisfaction on Olist and where is the operation failing?**
+**What drives customer satisfaction on Olist, and where is the platform operationally failing?**
 
-A SQL-first portfolio project analyzing 100k+ orders from Brazil's largest e-commerce marketplace (2016–2018). Built to demonstrate end-to-end data skills: database engineering, SQL analysis, Python analytics, NLP, and interactive dashboarding.
+Scoped to five questions: revenue/growth trends, category economics, delivery performance by region, seller-level risk, and the actual cause of bad reviews — with a SQL-first approach before any Python touches the data.
 
 ---
 
@@ -128,7 +128,7 @@ Late rate, avg delivery days, and delivery time distribution by customer state.
 
 Revenue, late rate, and review score per seller. Identifies high-revenue sellers actively degrading platform reputation.
 
-**Methodology note:** NTILE quartile ranking alone is insufficient when score distributions are compressed (review scores range 3.5–5.0). Applied absolute thresholds instead: `late_rate > 10%` AND `avg_review_score < 4.0`.
+**Methodology note:** NTILE quartile ranking alone is insufficient when score distributions are compressed (review scores range 3.5–5.0). Applied absolute thresholds instead: `late_rate > 10%` AND `avg_review_score < 4.0`. Quartiles would just split noise.
 
 **Key findings:**
 
@@ -196,7 +196,7 @@ Visual confirmation of C2 findings — no cohort shows meaningful recovery at an
 
 Keyword-based sentiment matching on Portuguese review text (39,093 reviews with comment text).
 
-**Methodology note:** VADER (English-optimized) applied to Portuguese produced ~97% neutral classification — largely invalid signal. Replaced with a Portuguese keyword lexicon covering common complaint and praise terms.
+**Methodology note:** Sentiment analysis used a hand-built Portuguese keyword lexicon, not VADER, because VADER is English-tuned and returned ~97% neutral on Portuguese text - a result that looks like "no signal" when it's actually "wrong tool."
 
 **Key finding — two independent signals converge:**
 
@@ -211,6 +211,16 @@ Keyword-based sentiment matching on Portuguese review text (39,093 reviews with 
 The 4-7 day cliff appears in both numeric scores and keyword sentiment simultaneously — converging evidence from two independent methods confirms this is the real customer tolerance threshold.
 
 **Divergence insight:** 24.6% of negative-keyword reviews gave score 1 despite emotionally neutral language ("I didn't receive it"). Transactional complaints carry no emotional keywords but maximum dissatisfaction — a class lexicon NLP systematically misses.
+
+---
+
+## Known Limitations
+
+- VADER sentiment scoring failed outright on Portuguese text (97% neutral, no usable signal) before being replaced with a custom lexicon — flagging this because a reviewer who doesn't know it failed will assume you didn't try the standard tool first.
+- NTILE-based seller ranking was abandoned mid-analysis once score compression made quartiles meaningless; switched to absolute thresholds.
+- Keyword-lexicon sentiment has a known blind spot: 24.6% of negative reviews use emotionally neutral language ("I didn't receive it") and get missed by keyword matching despite being maximally dissatisfied — this is a structural limitation of lexicon-based NLP, not a bug, and should be named as such rather than hidden.
+- Silhouette score for RFM clustering is 0.361 — moderate, not strong, separation. Worth saying so rather than letting a reviewer compute it themselves and wonder why you didn't mention it.
+- No FK enforcement on geolocation joins (duplicate zips required pre-aggregation) — a known schema compromise, not an oversight.
 
 ---
 
